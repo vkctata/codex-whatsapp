@@ -1,5 +1,6 @@
 node_modules/
 .DS_Store
 .codex-whatsapp/
+.wwebjs_cache/
 session/
 *.log
