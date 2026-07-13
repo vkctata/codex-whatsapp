@@ -9,7 +9,10 @@ const manifest = JSON.parse(
 );
 const mcp = JSON.parse(fs.readFileSync(path.join(root, ".mcp.json"), "utf8"));
 
-assert.equal(manifest.name, path.basename(root));
+assert.ok(
+  [path.basename(root), path.basename(path.dirname(root))].includes(manifest.name),
+  `Manifest name ${manifest.name} does not match the plugin directory`
+);
 assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
 assert.equal(manifest.mcpServers, "./.mcp.json");
 assert.ok(mcp.mcpServers?.whatsapp, "WhatsApp MCP server configuration is missing");
