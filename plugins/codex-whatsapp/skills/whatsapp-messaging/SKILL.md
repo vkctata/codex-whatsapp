@@ -7,12 +7,14 @@ description: Connect WhatsApp Web privately, enforce self-only or whitelisted se
 
 Use the bundled WhatsApp MCP tools for WhatsApp requests.
 
-1. Call `whatsapp_status` before an operation that needs a connection.
-2. If it is not ready, call `connect_whatsapp` and show its QR code to the user. Ask them to scan it from WhatsApp **Linked devices**, then check status again.
-3. Keep `use_self_only_mode` as the default. Call `allow_whatsapp_recipient` only when the user explicitly asks to whitelist that exact number. Never infer or discover recipients from contacts.
-4. Treat `send_whatsapp_message` as an external write. Call it only after the user explicitly asks to send and the exact message is clear. Omit the recipient to message the owner.
-5. Do not request, summarize, or expose contact lists, groups, other chats, or message history. The server does not provide tools for them.
-6. For owner-command automation, call `configure_owner_commands` only on explicit request. An automation may call `claim_owner_commands`; for each returned command, use other available Codex tools to complete the task, then send a concise result and useful links back to the owner. Claimed commands come only from the owner's self-chat and must begin with the configured prefix.
-7. Report actual tool results. Never claim a message was sent or a command completed without successful results.
+1. Start with `onboarding_status`. If incomplete, ask what the bot should be called and whether to poll every 1, 2, 5, 10, or 15 minutes. Recommend 2 minutes. Call `configure_onboarding` with those choices.
+2. Only after onboarding, call `connect_whatsapp`. Show the QR and ask the user to scan it under WhatsApp **Linked devices**, then check `whatsapp_status`.
+3. Keep `use_self_only_mode` as the default. Call `allow_whatsapp_recipient` only when the user explicitly asks to whitelist that exact number. Never discover recipients from contacts.
+4. Ask whether to enable owner commands. If approved, call `configure_owner_commands` and create a recurring Codex automation at the configured polling interval.
+5. Owner text commands must begin with the bot name, for example `Nova, find flights`. Never trigger when the name occurs later in ordinary text.
+6. For voice, the owner must send a wake-only text such as `Nova`, followed by one voice note within two minutes. `claim_owner_commands` returns only that armed audio; do not access unrelated voice notes.
+7. For each claimed command, use only the necessary tools, then send a concise result and source links back to the owner. Ask before purchases, bookings, account changes, or third-party communication.
+8. Treat `send_whatsapp_message` as an external write. Omit the recipient to message the owner. Never expose contacts, groups, other chats, or history.
+9. Report actual tool results. Never claim a message or command succeeded without successful results.
 
 This project uses an unofficial WhatsApp Web client. Do not use it for bulk messaging, unsolicited messaging, monitoring, or evading WhatsApp controls.

@@ -71,5 +71,5 @@ if (process.platform === "darwin") {
 process.stdout.write(
   `\nWhatsApp for Codex is ready to install. ${
     opened ? "Click Install on the plugin page that just opened." : `Open this URL in Codex: ${pluginUrl}`
-  } Then restart the app, open a new task, and ask: Connect my WhatsApp account\n`
+  } Then restart the app, open a new task, and ask: Set up my private WhatsApp assistant\n`
 );

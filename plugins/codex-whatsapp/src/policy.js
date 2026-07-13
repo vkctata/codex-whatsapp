@@ -9,9 +9,12 @@ export function defaultPolicy() {
     allowedNumbers: [],
     inbound: {
       enabled: false,
-      prefix: "/codex ",
+      wakeName: null,
+      pollIntervalMinutes: null,
       startedAt: null,
-      processedIds: []
+      processedIds: [],
+      voiceArmedAt: null,
+      voiceArmedUntil: null
     }
   };
 }
@@ -46,4 +49,24 @@ export function isRecipientAllowed(policy, number) {
 export function maskNumber(number) {
   if (!number) return "not configured";
   return number.length <= 4 ? `+${number}` : `+••••${number.slice(-4)}`;
+}
+
+export function normalizeWakeName(value) {
+  const name = String(value ?? "").trim().replace(/\s+/g, " ");
+  if (!/^[\p{L}\p{N}][\p{L}\p{N} _-]{1,23}$/u.test(name)) {
+    throw new Error("Choose a bot name with 2 to 24 letters or numbers; spaces, hyphens, and underscores are allowed.");
+  }
+  return name;
+}
+
+export function parseWakeText(body, wakeName) {
+  if (!wakeName) return null;
+  const escaped = wakeName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const wakeOnly = new RegExp(`^(?:hey\\s+)?${escaped}[,:]?$`, "iu");
+  if (wakeOnly.test(String(body).trim())) return { type: "arm_voice", command: null };
+
+  const command = new RegExp(`^(?:hey\\s+)?${escaped}[,:]?\\s+(.+)$`, "iu").exec(
+    String(body).trim()
+  );
+  return command ? { type: "text", command: command[1].trim() } : null;
 }

@@ -1,7 +1,7 @@
 {
   "name": "codex-whatsapp",
   "version": "0.1.0",
-  "description": "Send user-approved WhatsApp messages from Codex through a local WhatsApp Web session.",
+  "description": "Use a private wake-name assistant in your WhatsApp self-chat with self-only sending by default.",
   "author": {
     "name": "vkctata",
     "url": "https://github.com/vkctata"
@@ -9,18 +9,26 @@
   "homepage": "https://github.com/vkctata/codex-whatsapp",
   "repository": "https://github.com/vkctata/codex-whatsapp",
   "license": "MIT",
-  "keywords": ["whatsapp", "messaging", "mcp", "codex"],
+  "keywords": [
+    "whatsapp",
+    "messaging",
+    "mcp",
+    "codex"
+  ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "WhatsApp for Codex",
     "shortDescription": "Send WhatsApp messages with your approval",
-    "longDescription": "Connect a local WhatsApp Web session by QR code, look up recipients, and send messages you explicitly request from Codex.",
+    "longDescription": "Choose a bot name and polling interval, connect WhatsApp Web by QR, and run text or armed voice commands only from your own self-chat.",
     "developerName": "vkctata",
     "category": "Productivity",
-    "capabilities": ["Read", "Write"],
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
     "defaultPrompt": [
-      "Connect my WhatsApp account",
+      "Set up my private WhatsApp assistant",
       "Check whether WhatsApp is connected",
       "Send a WhatsApp message for me"
     ],
