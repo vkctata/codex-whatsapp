@@ -9,17 +9,33 @@ const pluginDir = path.join(repoRoot, "plugins", "codex-whatsapp");
 
 function run(command, args, options = {}) {
   process.stdout.write(`\n> ${command} ${args.join(" ")}\n`);
-  const executable =
-    process.platform === "win32" && (command === "npm" || command === "codex")
-      ? `${command}.cmd`
-      : command;
-  const result = spawnSync(executable, args, {
+  const spawnOptions = {
     cwd: options.cwd || repoRoot,
     env: options.env || process.env,
     encoding: "utf8",
     stdio: "inherit",
     shell: false
-  });
+  };
+  let result;
+  if (command === "npm") {
+    result =
+      process.platform === "win32"
+        ? spawnSync("npm.cmd", args, spawnOptions)
+        : spawnSync("npm", args, spawnOptions);
+  } else if (command === "codex") {
+    result =
+      process.platform === "win32"
+        ? spawnSync("codex.cmd", args, spawnOptions)
+        : spawnSync("codex", args, spawnOptions);
+  } else if (command === "open") {
+    result = spawnSync("/usr/bin/open", args, spawnOptions);
+  } else if (command === "rundll32") {
+    result = spawnSync("C:\\Windows\\System32\\rundll32.exe", args, spawnOptions);
+  } else if (command === "xdg-open") {
+    result = spawnSync("/usr/bin/xdg-open", args, spawnOptions);
+  } else {
+    throw new Error(`Unsupported installer command: ${command}`);
+  }
   if (result.error) throw result.error;
   if (result.status !== 0 && !options.allowFailure) {
     throw new Error(`${command} exited with status ${result.status}`);
@@ -67,7 +83,7 @@ let opened = false;
 if (process.platform === "darwin") {
   opened = run("open", [pluginUrl], { allowFailure: true });
 } else if (process.platform === "win32") {
-  opened = run("cmd.exe", ["/d", "/s", "/c", "start", "", pluginUrl], { allowFailure: true });
+  opened = run("rundll32", ["url.dll,FileProtocolHandler", pluginUrl], { allowFailure: true });
 } else {
   opened = run("xdg-open", [pluginUrl], { allowFailure: true });
 }
