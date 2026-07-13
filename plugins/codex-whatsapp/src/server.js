@@ -175,7 +175,7 @@ function textResult(text) {
 }
 
 const server = new McpServer(
-  { name: "codex-whatsapp", version: "0.1.0" },
+  { name: "codex-whatsapp", version: "0.2.0" },
   {
     instructions:
       "Onboarding must choose a bot wake name and polling interval before WhatsApp authentication. Privacy boundary: sending defaults to the linked account's own number only. Never send unless policy allows it and the user approved the exact message. Do not expose history, other chats, groups, or contacts. Owner automation claims only wake-name text commands or one voice note immediately following a wake-only text in the owner's self-chat."

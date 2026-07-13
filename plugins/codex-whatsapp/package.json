@@ -1,6 +1,6 @@
 {
   "name": "codex-whatsapp-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Local WhatsApp Web MCP server for the Codex WhatsApp plugin",
   "type": "module",
   "private": true,
