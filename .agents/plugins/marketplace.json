@@ -1,0 +1,20 @@
+{
+  "name": "codex-whatsapp-local",
+  "interface": {
+    "displayName": "Codex Whatsapp Local"
+  },
+  "plugins": [
+    {
+      "name": "codex-whatsapp",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-whatsapp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "codex-whatsapp",
+  "version": "0.1.0",
+  "description": "Send user-approved WhatsApp messages from Codex through a local WhatsApp Web session.",
+  "author": {
+    "name": "vkctata",
+    "url": "https://github.com/vkctata"
+  },
+  "homepage": "https://github.com/vkctata/codex-whatsapp",
+  "repository": "https://github.com/vkctata/codex-whatsapp",
+  "license": "MIT",
+  "keywords": ["whatsapp", "messaging", "mcp", "codex"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "WhatsApp for Codex",
+    "shortDescription": "Send WhatsApp messages with your approval",
+    "longDescription": "Connect a local WhatsApp Web session by QR code, look up recipients, and send messages you explicitly request from Codex.",
+    "developerName": "vkctata",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "Connect my WhatsApp account",
+      "Check whether WhatsApp is connected",
+      "Send a WhatsApp message for me"
+    ],
+    "brandColor": "#25D366",
+    "websiteURL": "https://github.com/vkctata/codex-whatsapp",
+    "privacyPolicyURL": "https://github.com/vkctata/codex-whatsapp/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/vkctata/codex-whatsapp/blob/main/TERMS.md"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "codex-whatsapp-mcp",
+  "version": "0.1.0",
+  "description": "Local WhatsApp Web MCP server for the Codex WhatsApp plugin",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "check": "node --check src/server.js && node --check src/phone.js && node --check src/policy.js",
+    "test": "node --test test/*.test.js",
+    "test:mcp": "node test/mcp-smoke.js",
+    "validate:plugin": "node scripts/validate-plugin.mjs",
+    "login:test": "node scripts/qr-login.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "qrcode": "1.5.4",
+    "whatsapp-web.js": "1.34.7",
+    "zod": "4.4.3"
+  }
+}

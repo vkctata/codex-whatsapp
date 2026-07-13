@@ -1,0 +1,26 @@
+name: Bug report
+description: Report a reproducible problem without personal data
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Never include QR data, session files, phone numbers, contacts, or message content.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin, Node, and operating-system versions
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps using redacted data
+    validations:
+      required: true
