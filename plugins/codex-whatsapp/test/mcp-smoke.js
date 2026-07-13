@@ -19,8 +19,10 @@ try {
     [
       "allow_whatsapp_recipient",
       "claim_owner_commands",
+      "configure_onboarding",
       "configure_owner_commands",
       "connect_whatsapp",
+      "onboarding_status",
       "remove_whatsapp_recipient",
       "send_whatsapp_message",
       "use_self_only_mode",

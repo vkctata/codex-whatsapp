@@ -1,6 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { defaultPolicy, isRecipientAllowed, maskNumber } from "../src/policy.js";
+import {
+  defaultPolicy,
+  isRecipientAllowed,
+  maskNumber,
+  normalizeWakeName,
+  parseWakeText
+} from "../src/policy.js";
 
 test("self-only mode allows only the owner", () => {
   const policy = { ...defaultPolicy(), ownerNumber: "447700900123" };
@@ -25,4 +31,21 @@ test("a missing owner denies every recipient", () => {
 
 test("masks all but the last four digits", () => {
   assert.equal(maskNumber("447700900123"), "+••••0123");
+});
+
+test("normalizes a safe wake name", () => {
+  assert.equal(normalizeWakeName("  My   Nova  "), "My Nova");
+  assert.throws(() => normalizeWakeName("!"), /2 to 24/);
+});
+
+test("parses strict wake-name commands", () => {
+  assert.deepEqual(parseWakeText("Nova, find flights", "Nova"), {
+    type: "text",
+    command: "find flights"
+  });
+  assert.deepEqual(parseWakeText("hey nova", "Nova"), {
+    type: "arm_voice",
+    command: null
+  });
+  assert.equal(parseWakeText("A note mentioning Nova later", "Nova"), null);
 });

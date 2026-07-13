@@ -9,12 +9,16 @@ const pluginDir = path.join(repoRoot, "plugins", "codex-whatsapp");
 
 function run(command, args, options = {}) {
   process.stdout.write(`\n> ${command} ${args.join(" ")}\n`);
-  const result = spawnSync(command, args, {
+  const executable =
+    process.platform === "win32" && (command === "npm" || command === "codex")
+      ? `${command}.cmd`
+      : command;
+  const result = spawnSync(executable, args, {
     cwd: options.cwd || repoRoot,
     env: options.env || process.env,
     encoding: "utf8",
     stdio: "inherit",
-    shell: process.platform === "win32"
+    shell: false
   });
   if (result.error) throw result.error;
   if (result.status !== 0 && !options.allowFailure) {
@@ -63,7 +67,7 @@ let opened = false;
 if (process.platform === "darwin") {
   opened = run("open", [pluginUrl], { allowFailure: true });
 } else if (process.platform === "win32") {
-  opened = run("cmd", ["/c", "start", "", pluginUrl], { allowFailure: true });
+  opened = run("cmd.exe", ["/d", "/s", "/c", "start", "", pluginUrl], { allowFailure: true });
 } else {
   opened = run("xdg-open", [pluginUrl], { allowFailure: true });
 }
@@ -71,5 +75,5 @@ if (process.platform === "darwin") {
 process.stdout.write(
   `\nWhatsApp for Codex is ready to install. ${
     opened ? "Click Install on the plugin page that just opened." : `Open this URL in Codex: ${pluginUrl}`
-  } Then restart the app, open a new task, and ask: Connect my WhatsApp account\n`
+  } Then restart the app, open a new task, and ask: Set up my private WhatsApp assistant\n`
 );
