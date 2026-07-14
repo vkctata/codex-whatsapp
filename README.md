@@ -23,7 +23,7 @@ The MCP server runs locally. WhatsApp session credentials and recipient policy a
 ## Requirements
 
 - Codex or the ChatGPT desktop app with local plugins/MCP support
-- Node.js 18 or newer
+- Node.js 22 or newer (Node.js 22 or 24 LTS recommended)
 - Google Chrome or Chromium
 - A WhatsApp account and phone capable of scanning a Linked Devices QR code
 

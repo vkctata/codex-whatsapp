@@ -44,7 +44,7 @@ function run(command, args, options = {}) {
 }
 
 const major = Number(process.versions.node.split(".")[0]);
-if (major < 18) throw new Error("Node.js 18 or newer is required.");
+if (major < 22) throw new Error("Node.js 22 or newer is required.");
 
 const chromeCandidates =
   process.platform === "darwin"
