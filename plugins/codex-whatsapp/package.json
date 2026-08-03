@@ -17,7 +17,7 @@
     "login:test": "node scripts/qr-login.mjs"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.29.0",
+    "@modelcontextprotocol/sdk": "1.30.0",
     "qrcode": "1.5.4",
     "whatsapp-web.js": "1.34.7",
     "zod": "4.4.3"
